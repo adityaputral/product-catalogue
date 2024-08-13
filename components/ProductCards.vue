@@ -7,14 +7,18 @@
                         <img :src="cardData.image" />
                     </div>
                     <div class="card__description">
-
-                        <span class="card__description__subtitle"><i class="fa fa-star" aria-hidden="true"></i> {{
+                        <div><span class="card__description__subtitle"><i class="fa fa-star" aria-hidden="true"></i> {{
                         cardData.rating.rate }}</span>
-                        <h2 class="card__description__title">{{cardData.title}}</h2>
-                        <p><strong>$ {{cardData.price}}</strong></p>
+                            <h2 class="card__description__title">{{cardData.title}}</h2>
+                        </div>
 
-                        <button class="is-primary" type="button"
-                            @click="() => goToDetailPage(cardData)">Details</button>
+                        <div>
+                            <p><strong>$ {{cardData.price}}</strong></p>
+
+                            <button class="is-primary" type="button"
+                                @click="() => goToDetailPage(cardData)">Details</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -46,7 +50,7 @@ const goToDetailPage = (cardData: Card) => {
 .cards {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     margin: 12px;
     flex-wrap: wrap;
 
@@ -75,6 +79,7 @@ const goToDetailPage = (cardData: Card) => {
         .card {
             box-shadow: 0 0 15px #00000029;
             border-radius: $borderRadius;
+            height: 100%;
         }
 
         .card__thumbnail {
@@ -94,6 +99,10 @@ const goToDetailPage = (cardData: Card) => {
         .card__description {
             padding: 10px;
             text-align: center;
+            height: calc(100% - 200px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card__description button {
@@ -108,6 +117,8 @@ const goToDetailPage = (cardData: Card) => {
         .card__description__title {
             color: $primaryColor;
             line-height: 26px;
+            font-size: 26px;
+            overflow-wrap: anywhere;
         }
 
         .card__description__subtitle {
