@@ -1,24 +1,26 @@
 <template>
-    <ProductCards :cardsData="cardsData" @click="goToDetailPage" />
+    <ProductCards :cardsData="listOfProducts" @click="goToDetailPage" />
 </template>
 
 <script setup lang="ts">
+import type { ProductCollection, ProductData } from "./index"
 const router = useRouter();
-
-const cardsData = ref([{
-    "id": 1,
-    "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    "price": 109.95,
-    "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    "category": "men's clothing",
-    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    "rating": {
-        "rate": 4.1,
-        "count": 259
-    }
-},])
 
 const goToDetailPage = (cardData: Record<string, any>) => {
     router.push({ name: "products-productId", params: { productId: cardData.id } })
 }
+
+
+const listOfProducts = ref<ProductCollection>([]);
+const fetchListOfProducts = async () => {
+    const productList: ProductCollection = await $fetch(`https://fakestoreapi.com/products`, {
+        method: 'GET',
+    })
+
+    listOfProducts.value = { ...productList }
+}
+
+onMounted(async () => {
+    await fetchListOfProducts();
+})
 </script>
