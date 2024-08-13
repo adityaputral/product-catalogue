@@ -1,0 +1,11 @@
+button {
+  cursor: pointer;
+
+  &.is-primary {
+    color: $whiteColor;
+    background-color: $primaryColor;
+    border: none;
+    border-radius: $borderRadius;
+    padding: 10px;
+  }
+}

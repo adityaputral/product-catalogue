@@ -2,12 +2,15 @@
 @import "./mixins/mixins.scss";
 @import "./typography/typography.scss";
 
+@import "./components/button.scss";
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 html {
