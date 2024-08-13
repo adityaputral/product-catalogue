@@ -1,8 +1,10 @@
 <template>
-    <ProductCards :cardsData="cardsData" />
+    <ProductCards :cardsData="cardsData" @click="goToDetailPage" />
 </template>
 
 <script setup lang="ts">
+const router = useRouter();
+
 const cardsData = ref([{
     "id": 1,
     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -12,4 +14,8 @@ const cardsData = ref([{
     "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     "rating": 3.9,
 },])
+
+const goToDetailPage = (cardData: Record<string, any>) => {
+    router.push({ name: "products-productId", params: { productId: cardData.id } })
+}
 </script>

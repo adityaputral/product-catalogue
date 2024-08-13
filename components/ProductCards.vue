@@ -13,7 +13,8 @@
                         <h2 class="card__description__title">{{cardData.title}}</h2>
                         <p><strong>$ {{cardData.price}}</strong></p>
 
-                        <button class="is-primary">Details</button>
+                        <button class="is-primary" type="button"
+                            @click="() => goToDetailPage(cardData)">Details</button>
                     </div>
                 </div>
             </div>
@@ -25,13 +26,20 @@
 </template>
 
 <script lang="ts" setup>
-import type { CardCollection } from "./ProductCards"
+import type { CardCollection, Card } from "./ProductCards"
 const props = defineProps({
     cardsData: {
         type: Array as PropType<Array<CardCollection>>,
-        required: false
+        required: false,
     }
 })
+const emit = defineEmits<{
+    (event: 'click', cardData: Card): void
+}>();
+
+const goToDetailPage = (cardData: Card) => {
+    emit('click', cardData)
+}
 </script>
 
 <style lang="scss" scoped>
