@@ -3,8 +3,10 @@
 </template>
 
 <script setup lang="ts">
+import { useLoadingStore } from './../../store/loading'
 import type { ProductCollection, ProductData } from "./index"
 const router = useRouter();
+const loadingStore = useLoadingStore();
 
 const goToDetailPage = (cardData: Record<string, any>) => {
     router.push({ name: "products-productId", params: { productId: cardData.id } })
@@ -21,6 +23,8 @@ const fetchListOfProducts = async () => {
 }
 
 onMounted(async () => {
+    loadingStore.setLoadingTo(true)
     await fetchListOfProducts();
+    loadingStore.setLoadingTo(false)
 })
 </script>

@@ -8,23 +8,26 @@
         </section>
 
         <section class="article__description">
-            <h1 class="article__description__title">{{detailedData.title}}</h1>
+            <h1 class="article__description__title">{{detailedData.title || '-'}}</h1>
             <span class="article__description__subtitle">
-                <i class="fa fa-star" aria-hidden="true"></i> {{detailedData?.rating?.rate}}
-                ({{detailedData?.rating?.count}}) · {{detailedData.category}}
+                <i class="fa fa-star" aria-hidden="true"></i> {{detailedData?.rating?.rate|| '-'}}
+                ({{detailedData?.rating?.count|| '-'}}) · {{detailedData.category|| '-'}}
             </span>
             <p class="article__description__main">
-                {{detailedData.description}}
+                {{detailedData.description|| '-'}}
             </p>
-            <p class="article__description__footer"><strong>$ {{detailedData.price}}</strong></p>
+            <p class="article__description__footer"><strong>$ {{detailedData.price|| '-'}}</strong></p>
         </section>
     </div>
 </template>
 
 <script setup lang="ts">
 import type { DetailData } from "./[productId]"
+
+import { useLoadingStore } from './../../store/loading'
 const router = useRouter();
 const route = useRoute();
+const loadingStore = useLoadingStore();
 
 const goBackToListing = () => {
     router.push({
@@ -42,7 +45,9 @@ const fetchDetailedData = async () => {
 }
 
 onMounted(async () => {
+    loadingStore.setLoadingTo(true)
     await fetchDetailedData()
+    loadingStore.setLoadingTo(false)
 })
 </script>
 
