@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  css: ['~/assets/scss/main.scss', "font-awesome/css/font-awesome.css"],
+  css: ['~/assets/scss/main.scss', "font-awesome/css/font-awesome.css", '@oruga-ui/theme-oruga/dist/oruga.css'],
   vite: {
     css: {
       preprocessorOptions: {
