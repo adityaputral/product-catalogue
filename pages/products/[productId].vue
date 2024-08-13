@@ -1,32 +1,62 @@
 <template>
+    <div class="page-navigator">
+        <button class="is-light" type="button" @click="goBackToListing">Back</button>
+    </div>
     <div class="article">
         <section class="article__image">
-            <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="">
+            <img :src="detailedData.image" alt="">
         </section>
 
         <section class="article__description">
-            <h1 class="article__description__title">Mens Cotton Jacket</h1>
+            <h1 class="article__description__title">{{detailedData.title}}</h1>
             <span class="article__description__subtitle">
-                <i class="fa fa-star" aria-hidden="true"></i> 4.7 (500) · Men's clothing
+                <i class="fa fa-star" aria-hidden="true"></i> {{detailedData?.rating?.rate}}
+                ({{detailedData?.rating?.count}}) · {{detailedData.category}}
             </span>
             <p class="article__description__main">
-                great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking,
-                camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your
-                family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day..
+                {{detailedData.description}}
             </p>
-            <p class="article__description__footer"><strong>$ 123</strong></p>
+            <p class="article__description__footer"><strong>$ {{detailedData.price}}</strong></p>
         </section>
     </div>
 </template>
 
 <script setup lang="ts">
+import type { DetailData } from "./[productId]"
+const router = useRouter();
+const route = useRoute();
+
+const goBackToListing = () => {
+    router.push({
+        name: "products"
+    })
+}
+
+const detailedData = ref<DetailData>({})
+const fetchDetailedData = async () => {
+    const productData: DetailData = await $fetch(`https://fakestoreapi.com/products/${route.params.productId}`, {
+        method: 'GET',
+    })
+
+    detailedData.value = { ...productData }
+}
+
+onMounted(async () => {
+    await fetchDetailedData()
+})
 </script>
 
 <style lang="scss" scoped>
+.page-navigator {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
 .article {
     width: 100%;
     display: flex;
     gap: 60px;
+    margin-bottom: 20px;
 
     @include mobile {
         flex-direction: column;
@@ -52,6 +82,7 @@
         &__subtitle {
             display: block;
             margin-bottom: 30px;
+            text-transform: capitalize;
         }
 
         &__subtitle i.fa.fa-star:before {

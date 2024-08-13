@@ -1,11 +1,17 @@
 button {
   cursor: pointer;
+  border: none;
+  border-radius: $borderRadius;
+  padding: 10px;
 
   &.is-primary {
     color: $whiteColor;
     background-color: $primaryColor;
-    border: none;
-    border-radius: $borderRadius;
-    padding: 10px;
+  }
+
+  &.is-light {
+    background-color: $whiteColor;
+    color: $blackColor;
+    border: 1px solid $blackColor;
   }
 }
