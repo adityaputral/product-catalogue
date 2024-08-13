@@ -1,0 +1,30 @@
+@import "./variables/variables.scss";
+@import "./mixins/mixins.scss";
+
+html {
+  height: 100%;
+
+  body {
+    position: relative;
+    height: 100%;
+
+    main[role="main"] {
+      position: relative;
+      z-index: 1;
+      min-height: calc(100vh - 291px);
+
+      .container {
+        max-width: 1270px;
+        padding: 0 10px;
+
+        @include tablet {
+          max-width: 720px;
+        }
+
+        @include mobile {
+          max-width: 300px;
+        }
+      }
+    }
+  }
+}
