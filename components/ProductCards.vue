@@ -9,7 +9,7 @@
                     <div class="card__description">
 
                         <span class="card__description__subtitle"><i class="fa fa-star" aria-hidden="true"></i> {{
-                        cardData.rating }}</span>
+                        cardData.rating.rate }}</span>
                         <h2 class="card__description__title">{{cardData.title}}</h2>
                         <p><strong>$ {{cardData.price}}</strong></p>
 
