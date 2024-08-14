@@ -2,7 +2,7 @@
   <o-loading v-model:active="loading" :full-page="false" :cancelable="true">
     <o-icon pack="fa" icon="spinner" size="large" spin />
   </o-loading>
-  <main role="main" v-show="!loading">
+  <main role="main">
     <div class="container">
       <NuxtLayout>
         <NuxtPage />

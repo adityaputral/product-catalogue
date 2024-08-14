@@ -6,7 +6,6 @@ export const useLoadingStore = defineStore('loading', {
     }),
     actions: {
         setLoadingTo(value: boolean) {
-            console.log("yoo")
             this.loading = value;
         }
     }

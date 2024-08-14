@@ -6,6 +6,7 @@
 import { useLoadingStore } from './../../store/loading'
 import type { ProductCollection, ProductData } from "./index"
 const router = useRouter();
+const route = useRoute();
 const loadingStore = useLoadingStore();
 
 const goToDetailPage = (cardData: Record<string, any>) => {
@@ -14,17 +15,21 @@ const goToDetailPage = (cardData: Record<string, any>) => {
 
 
 const listOfProducts = ref<ProductCollection>([]);
-const fetchListOfProducts = async () => {
-    const productList: ProductCollection = await $fetch(`https://fakestoreapi.com/products`, {
+const fetchListOfProducts = async (category?: string) => {
+    loadingStore.setLoadingTo(true)
+    const productList: ProductCollection = await $fetch(`https://fakestoreapi.com/products${category ? `/category/${category}` : ''}`, {
         method: 'GET',
     })
 
-    listOfProducts.value = { ...productList }
+    listOfProducts.value = [...productList]
+    loadingStore.setLoadingTo(false)
 }
 
+watch(() => route.query.category, (value: string) => {
+    fetchListOfProducts(value)
+});
+
 onMounted(async () => {
-    loadingStore.setLoadingTo(true)
-    await fetchListOfProducts();
-    loadingStore.setLoadingTo(false)
+    await fetchListOfProducts(route.query.category);
 })
 </script>
