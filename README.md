@@ -1,6 +1,23 @@
-# Nuxt 3 Minimal Starter
+# Product Catalogue Apps
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+https://simple-product-catalogue-apps.vercel.app/
+
+## Apps Description
+
+Stacks :
+
+- Nuxt 3
+- TypeScript
+- Pinia
+- SCSS
+
+Pages :
+
+- /products - list down all products fetched from the API
+- /products/<id> - show the detailed information of the product
+
+Backend API Documentation:
+https://fakestoreapi.com/
 
 ## Setup
 
@@ -71,5 +88,3 @@ yarn preview
 # bun
 bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
