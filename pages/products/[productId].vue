@@ -2,7 +2,7 @@
     <div class="page-navigator">
         <button class="is-light" type="button" @click="goBackToListing">Back</button>
     </div>
-    <div class="article">
+    <div class="article" v-show="!isFetching">
         <section class="article__image">
             <img :src="detailedData.image" alt="">
         </section>
@@ -29,6 +29,8 @@ const router = useRouter();
 const route = useRoute();
 const loadingStore = useLoadingStore();
 
+const isFetching = ref(true);
+
 const goBackToListing = () => {
     router.push({
         name: "products"
@@ -48,6 +50,8 @@ onMounted(async () => {
     loadingStore.setLoadingTo(true)
     await fetchDetailedData()
     loadingStore.setLoadingTo(false)
+
+    isFetching.value = false;
 })
 </script>
 
