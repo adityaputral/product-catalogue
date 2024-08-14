@@ -15,4 +15,7 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
   ],
+  routeRules: {
+    "/": { redirect: "/products" }
+  }
 })
