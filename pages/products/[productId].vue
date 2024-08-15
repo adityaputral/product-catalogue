@@ -23,11 +23,12 @@
 
 <script setup lang="ts">
 import type { DetailData } from "./[productId]"
-
 import { useLoadingStore } from './../../store/loading'
+
 const router = useRouter();
 const route = useRoute();
 const loadingStore = useLoadingStore();
+
 
 const isFetching = ref(true);
 
@@ -45,6 +46,9 @@ const fetchDetailedData = async () => {
 
     detailedData.value = { ...productData }
 }
+useHead({
+    title: detailedData.value.title,
+})
 
 onMounted(async () => {
     loadingStore.setLoadingTo(true)

@@ -16,4 +16,14 @@ import { useLoadingStore } from './store/loading'
 
 const loadingStore = useLoadingStore();
 const { loading } = storeToRefs(loadingStore)
+
+const route = useRoute()
+
+useHead({
+  titleTemplate: (productName: string) => {
+    return productName
+      ? `${productName} - Products`
+      : 'Products'
+  }
+})
 </script>
