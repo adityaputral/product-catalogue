@@ -2,7 +2,7 @@
     <header>
         <nav>
             <div class="navigation__logo">
-                <h1>{{props.title}}</h1>
+                <h1 @click="router.push('/')">{{props.title}}</h1>
             </div>
             <div class="navigation__links">
                 <ul>
@@ -28,6 +28,8 @@ const props = defineProps({
         required: false,
     }
 })
+
+const router = useRouter();
 </script>
 
 <style lang="scss" scoped>
@@ -45,6 +47,8 @@ nav {
     flex-direction: column;
 
     .navigation__logo {
+        cursor: pointer;
+
         h1 {
             margin-bottom: 30px;
         }
